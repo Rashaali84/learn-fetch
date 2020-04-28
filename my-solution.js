@@ -23,7 +23,7 @@ getUserAsync('rashaali84')
     .then(data => console.log(data.repos_url));
 
 //*TAsk 3 async-await all for multiple names*/
-async function asyncAll() {
+/*async function asyncAll() {
     try {
         for (name of ["rashaali84", "BrendanEich"]) {
             userDetails = await fetch("https://api.github.com/users/" + name);
@@ -34,4 +34,20 @@ async function asyncAll() {
         throw e;
     }
 }
-asyncAll();
+asyncAll();*/
+
+const runAsyncFunctions = () => {
+    const users = ["rashaali84", "BrendanEich"];
+
+    Promise.all(
+        users.map(async user => {
+            userDetails = await fetch("https://api.github.com/users/" + user);
+            userDetailsJSON = await userDetails.json();
+            console.log("userDetailsJSON", userDetailsJSON);
+        })
+    )
+
+    console.log(users)
+}
+
+runAsyncFunctions();
